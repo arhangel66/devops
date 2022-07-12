@@ -1,0 +1,1 @@
+It's a learning repo for the hexlet course `devops-for-programmers`
