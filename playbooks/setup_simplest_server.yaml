@@ -1,0 +1,30 @@
+- hosts: webservers
+
+  tasks:
+    - name: install nginx
+      apt:
+        name: nginx
+        state: present
+      become: yes
+
+    - name: copy '../files/index.html' to '/usr/share/nginx/html/index.html'
+      copy:
+        src: ../files/index.html
+        dest: /usr/share/nginx/html/index.html
+      become: yes
+
+    - name: copy '../files/nginx.conf' to '/etc/nginx/nginx.conf'
+      copy:
+        src: ../files/nginx.conf
+        dest: /etc/nginx/nginx.conf
+      notify:
+        - restart nginx
+      become: yes
+
+  handlers:
+    - name: restart nginx
+      service:
+        name: nginx
+        state: reloaded
+      become: yes
+
