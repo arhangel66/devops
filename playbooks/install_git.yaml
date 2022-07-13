@@ -1,0 +1,15 @@
+- hosts: webservers
+
+  tasks:
+    - name: Install git
+      apt:
+        name: git
+        state: present
+      become: yes
+      tags: install_git
+
+    - name: update apt cache
+      apt:
+        update_cache: yes
+      tags: update_cache
+      become: yes
