@@ -1,7 +1,4 @@
 - hosts: webservers
-  vars:
-    nginx_port: 80
-    root_dir: /usr/share/nginx/html
   tasks:
     - name: install nginx
       apt:
@@ -10,7 +7,7 @@
       become: yes
 
     - name: copy '../files/index.html' to '/usr/share/nginx/html/index.html'
-      copy:
+      template:
         src: ../files/index.html
         dest: "{{ root_dir }}/index.html"
       become: yes
