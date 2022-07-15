@@ -4,12 +4,14 @@
       apt:
         name: nginx
         state: present
+      when: ansible_os_family == 'Debian'
       become: yes
 
     - name: copy '../files/index.html' to '/usr/share/nginx/html/index.html'
       template:
         src: ../files/index.html
         dest: "{{ root_dir }}/index.html"
+      when: ansible_os_family == 'Debian'
       become: yes
 
     - name: copy '../templates/nginx.conf' to '/etc/nginx/nginx.conf'
@@ -18,15 +20,15 @@
         dest: /etc/nginx/nginx.conf
       notify:
         - restart nginx
+      when: ansible_os_family == 'Debian'  # only debigan, because centos hasn't nginx folder
       become: yes
 
     - name: create users from the 'users' variable loop
       user:
         name: "{{ item }}"
         home: "/home/{{ item }}"
-        group: admin
         state: present
-      loop: "{{ users }}"
+      loop: "{{ users }}"  #
       become: yes
       tags: create_users
 
