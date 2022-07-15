@@ -13,3 +13,11 @@
         update_cache: yes
       tags: update_cache
       become: yes
+
+    - name: copy .gitconfig to the user home difrectory for every user
+      template:
+        src: ../templates/.gitconfig
+        dest: "/home/{{ item }}/.gitconfig"
+      loop: "{{ users }}"
+      become: yes
+      tags: git

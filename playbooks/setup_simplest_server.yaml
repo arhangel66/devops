@@ -20,6 +20,16 @@
         - restart nginx
       become: yes
 
+    - name: create users from the 'users' variable loop
+      user:
+        name: "{{ item }}"
+        home: "/home/{{ item }}"
+        group: admin
+        state: present
+      loop: "{{ users }}"
+      become: yes
+      tags: create_users
+
   handlers:
     - name: restart nginx
       service:
