@@ -12,6 +12,7 @@
         src: ../files/index.html
         dest: "{{ root_dir }}/index.html"
       when: ansible_os_family == 'Debian'
+      tags: copy_html
       become: yes
 
     - name: copy '../templates/nginx.conf' to '/etc/nginx/nginx.conf'
@@ -31,6 +32,12 @@
       loop: "{{ users }}"  #
       become: yes
       tags: create_users
+
+    - name: echo ansible_host
+      debug:
+          msg: " http://{{ ansible_host }}/ "
+      become: yes
+      tags: debug
 
   handlers:
     - name: restart nginx

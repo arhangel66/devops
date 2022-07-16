@@ -9,6 +9,7 @@
   <h1 class="text-3xl font-bold mx-auto">
     Hello world!
   </h1>
-	<h2>This is server {{ server_name }}</h2>
+	<h2>{{ html_title | upper}}</h2>
+	<p>Last update - {{ '%Y-%m-%d %H:%M:%S' | strftime(ansible_date_time.epoch) }}</p>
 </body>
 </html>
