@@ -7,6 +7,20 @@
       when: ansible_os_family == 'Debian'
       become: yes
 
+    - name: install cowsay
+      apt:
+        name: cowsay
+        state: present
+      when: ansible_os_family == 'Debian'
+      become: yes
+
+    - name: cowsay 'Hello, from web server' and register ans cowanswer
+      command: cowsay 'Hello, from web server'
+      register: cowsay_out
+      when: ansible_os_family == 'Debian'
+      become: yes
+      tags: ["cowsay", "copy_html"]
+
     - name: copy '../files/index.html' to '/usr/share/nginx/html/index.html'
       template:
         src: ../files/index.html

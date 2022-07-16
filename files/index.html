@@ -11,5 +11,6 @@
   </h1>
 	<h2>{{ html_title | upper}}</h2>
 	<p>Last update - {{ '%Y-%m-%d %H:%M:%S' | strftime(ansible_date_time.epoch) }}</p>
+	<pre><code>{{ cowsay_out.stdout }} </code></pre>
 </body>
 </html>
