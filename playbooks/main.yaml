@@ -1,0 +1,10 @@
+- hosts: webservers
+  tasks:
+    - ansible.builtin.debug:
+        msg: play1
+
+- name: Include an install_git playbook
+  import_playbook: install_git.yaml
+
+- name: include setup_nginx playbook
+  import_playbook: setup_nginx.yaml
