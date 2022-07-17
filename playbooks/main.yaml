@@ -3,6 +3,7 @@
     - ansible.builtin.debug:
         msg: play1
 
+
 - name: Include an install_git playbook
   import_playbook: install_git.yaml
 

@@ -1,0 +1,6 @@
+- hosts: webservers
+  roles:
+    - role: geerlingguy.postgresql
+    - role: geerlingguy.nodejs
+      vars:
+        nodejs_version: "16.x"
