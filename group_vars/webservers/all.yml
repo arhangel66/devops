@@ -3,6 +3,9 @@ root_dir: /usr/share/nginx/html
 server_name: "{{ ansible_hostname }}"
 html_title: "This is server {{ ansible_hostname }}"
 
+POSTGRES_PORT: 5432
+POSTGRES_HOST: "localhost"
+
 users:
   - jaime
   - sansa

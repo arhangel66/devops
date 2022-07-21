@@ -1,6 +1,35 @@
 - hosts: webservers
   roles:
     - role: geerlingguy.postgresql
+      vars:
+        - postgresql_databases:
+          - name: "{{POSTGRES_DBNAME}}"
+        - postgresql_users:
+            - name: "{{POSTGRES_USER}}"
+              password: " {{POSTGRES_PASSWORD}}"
+
+
     - role: geerlingguy.nodejs
       vars:
         nodejs_version: "16.x"
+
+  tasks:
+    - name: download git repo https://github.com/hexlet-components/js-fastify-blog.git
+      git:
+        repo: https://github.com/hexlet-components/js-fastify-blog.git
+        dest: /home/sansa/js-fastify-blog
+
+    - name: copy ../templates/.env to /home/sansa/js-fastify-blog/.env
+      tags: copy
+      template:
+        src: ../templates/.env
+        dest: /home/sansa/js-fastify-blog/.env
+
+
+    - name: run 'npm install'
+      shell: 'cd /home/sansa/js-fastify-blog/ && npm install'
+      become: yes
+      tags: npm
+
+
+

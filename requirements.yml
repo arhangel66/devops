@@ -1,0 +1,8 @@
+roles:
+  # Install a role from Ansible Galaxy.
+  - name: geerlingguy.postgresql
+  - name: geerlingguy.nodejs
+
+
+
+# to run requirements - run ` ansible-galaxy install -r requirements.yml `
